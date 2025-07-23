@@ -1,4 +1,4 @@
-# iFunds - Investment Management Dashboard
+# Manulife Investment Management Dashboard
 
 A modern React TypeScript application inspired by the Manulife Investment Management dashboard design. This project provides a comprehensive fund display system with interactive portfolio visualization.
 
@@ -30,8 +30,8 @@ A modern React TypeScript application inspired by the Manulife Investment Manage
 
 1. Clone the repository
 ```bash
-git clone <repository-url>
-cd ifunds
+git clone https://github.com/JoyMHuang/copilot-frontend.git
+cd copilot-frontend
 ```
 
 2. Install dependencies
@@ -58,8 +58,15 @@ npm run dev
 ```
 src/
 ├── components/          # React components
-│   ├── Sidebar.tsx     # Navigation sidebar
+│   ├── Sidebar/        # Sidebar navigation components
+│   ├── Logo.tsx        # Manulife logo component
+│   ├── Router.tsx      # Route management
 │   └── PortfolioDashboard.tsx  # Main dashboard
+├── pages/              # Page components
+│   ├── Dashboard/      # Dashboard page
+│   ├── FundList/       # Fund list page
+│   └── TransactionHistory/  # Transaction history page
+├── routes/             # Route configuration
 ├── data/               # Mock data and API utilities
 │   └── mockData.ts     # Sample portfolio data
 ├── types/              # TypeScript type definitions
