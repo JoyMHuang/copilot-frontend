@@ -1,0 +1,86 @@
+/* Fund List 页面样式 */
+
+.fundlist-container {
+  background-color: #f9fafb;
+  min-height: 100%;
+}
+
+.fundlist-content {
+  padding: 2rem;
+}
+
+.fundlist-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.fundlist-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #22c55e;
+  margin-right: 0.75rem;
+}
+
+.fundlist-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.fundlist-card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.fundlist-placeholder {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.fundlist-placeholder-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #9ca3af;
+  margin: 0 auto 1rem;
+}
+
+.fundlist-placeholder-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #111827;
+  margin: 0 0 0.5rem 0;
+}
+
+.fundlist-placeholder-description {
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .fundlist-content {
+    padding: 1rem;
+  }
+  
+  .fundlist-title {
+    font-size: 1.5rem;
+  }
+  
+  .fundlist-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .fundlist-card {
+    padding: 1rem;
+  }
+  
+  .fundlist-placeholder {
+    padding: 2rem 0;
+  }
+}

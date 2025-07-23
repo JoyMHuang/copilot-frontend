@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white">
+            <div class="p-4">
+                <h1 class="text-xl font-bold text-green-500">Manulife</h1>
+                <p class="text-sm text-gray-300">Investment Management</p>
+            </div>
+            <nav class="px-4 py-2">
+                <a href="#" class="block py-2 px-4 bg-green-500 text-white rounded mb-2">Portfolio Dashboard</a>
+                <a href="#" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded mb-2">Transact</a>
+                <a href="#" class="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded">Profile</a>
+            </nav>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <h2 class="text-2xl font-bold mb-4">Portfolio Dashboard</h2>
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h3 class="text-lg font-semibold mb-4">Total Market Value</h3>
+                <p class="text-3xl font-bold text-green-500">PHP 14,485,393.54</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

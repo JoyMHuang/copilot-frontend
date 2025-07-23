@@ -1,0 +1,51 @@
+/* Dashboard 页面样式 */
+
+.dashboard-container {
+  background-color: #f9fafb;
+  min-height: 100%;
+}
+
+.dashboard-content {
+  padding: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #22c55e;
+  margin-right: 0.75rem;
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.dashboard-portfolio {
+  /* Portfolio dashboard 容器样式可以在这里添加额外的自定义样式 */
+  position: relative;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 1rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
