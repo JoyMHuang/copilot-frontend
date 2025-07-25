@@ -51,5 +51,5 @@ export const findRouteByPath = (path: string): Route | undefined => {
 
 // 获取默认路由
 export const getDefaultRoute = (): Route => {
-  return routes[0]; // 默认为Dashboard
+  return routes[0]; // 返回第一个路由作为默认路由（Dashboard）
 };

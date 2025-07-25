@@ -7,13 +7,9 @@ import {
   TrophyIcon,
   ChartBarIcon
 } from '@heroicons/react/24/outline';
-import type { NavigationItem } from '../../types';
+import { Link, useLocation } from 'react-router-dom';
+import { routes } from '../../routes';
 import Logo from '../Logo';
-
-interface SidebarProps {
-  navigation: NavigationItem[];
-  onNavigationChange: (item: NavigationItem) => void;
-}
 
 const iconMap = {
   'chart-pie': ChartPieIcon,
@@ -25,7 +21,9 @@ const iconMap = {
   'trending-up': ChartBarIcon,
 };
 
-export default function Sidebar({ navigation, onNavigationChange }: SidebarProps) {
+export default function Sidebar() {
+  const location = useLocation();
+
   return (
     <div className="flex h-screen flex-col bg-sidebar-bg text-white w-64">
       {/* Logo */}
@@ -43,21 +41,23 @@ export default function Sidebar({ navigation, onNavigationChange }: SidebarProps
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
-        {navigation.map((item) => {
-          const Icon = iconMap[item.icon as keyof typeof iconMap];
+        {routes.map((route) => {
+          const Icon = iconMap[route.icon as keyof typeof iconMap];
+          const isActive = location.pathname === route.path;
+          
           return (
-            <button
-              key={item.id}
-              onClick={() => onNavigationChange(item)}
+            <Link
+              key={route.id}
+              to={route.path}
               className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
-                item.current
+                isActive
                   ? 'bg-manulife-green text-white'
                   : 'text-gray-300 hover:bg-sidebar-hover hover:text-white'
               }`}
             >
               <Icon className="w-5 h-5 mr-3" />
-              {item.name}
-            </button>
+              {route.name}
+            </Link>
           );
         })}
       </nav>

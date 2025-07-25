@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import './TransactionHistory.css';
 
 export default function TransactionHistory() {
+  // 添加页面标识
+  useEffect(() => {
+    document.title = 'Transaction History - Manulife Investment Management';
+  }, []);
+
   return (
     <div className="transaction-container">
       <div className="transaction-content">

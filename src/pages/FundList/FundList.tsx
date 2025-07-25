@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { ChartBarIcon } from '@heroicons/react/24/outline';
 import './FundList.css';
 
 export default function FundList() {
+  // 添加页面标识
+  useEffect(() => {
+    document.title = 'Fund List - Manulife Investment Management';
+  }, []);
+
   return (
     <div className="fundlist-container">
       <div className="fundlist-content">

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ChartPieIcon } from '@heroicons/react/24/outline';
 import PortfolioDashboard from '../../components/PortfolioDashboard';
 import { usePortfolio, useWealthSpecialist } from '../../hooks/useCustomerData';
@@ -14,6 +15,11 @@ export default function Dashboard() {
   const loading = portfolioLoading || specialistLoading;
   // 合并错误状态
   const error = portfolioError || specialistError;
+
+  // 添加页面标识
+  useEffect(() => {
+    document.title = 'Dashboard - Manulife Investment Management';
+  }, []);
 
   // 加载状态
   if (loading) {
