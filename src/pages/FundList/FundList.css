@@ -7,6 +7,8 @@
 
 .fundlist-content {
   padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .fundlist-header {
@@ -61,7 +63,31 @@
   line-height: 1.5;
 }
 
+/* Grid Layout Enhancements */
+.fund-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Fund Card Optimizations */
+.fund-card {
+  min-height: 200px;
+  max-height: 250px;
+}
+
 /* 响应式设计 */
+@media (max-width: 1024px) {
+  .fundlist-content {
+    padding: 1.5rem;
+  }
+  
+  /* 在平板上显示单列 */
+  .grid-cols-1.lg\\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .fundlist-content {
     padding: 1rem;
@@ -82,5 +108,19 @@
   
   .fundlist-placeholder {
     padding: 2rem 0;
+  }
+  
+  /* 在手机上确保单列显示 */
+  .grid-cols-1.lg\\:grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* 卡片动画优化 */
+@media (hover: hover) {
+  .fundlist-card .cursor-pointer:hover {
+    transform: translateY(-2px);
+    transition: all 0.2s ease-in-out;
   }
 }
