@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { getFundList } from '../services/fundApi';
 import type { FundDto } from '../types';
+import { useNavigate } from 'react-router-dom';
 
 const FundList: React.FC = () => {
   const [funds, setFunds] = useState<FundDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [currency, setCurrency] = useState('全部');
+  const navigate = useNavigate();
 
   useEffect(() => {
     getFundList().then(data => {
@@ -54,7 +56,8 @@ const FundList: React.FC = () => {
         {filteredFunds.map(fund => (
           <div
             key={fund.id}
-            className="bg-white shadow-sm rounded-lg p-6 border border-gray-100"
+            className="bg-white shadow-sm rounded-lg p-6 border border-gray-100 cursor-pointer transition hover:shadow-md"
+            onClick={() => navigate(`/fund-detail/${fund.code}`)}
           >
             <h2 className="text-lg font-semibold text-green-600 mb-2">{fund.fundName}</h2>
             <div className="text-gray-700 mb-1">代码: {fund.code}</div>

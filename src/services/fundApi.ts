@@ -17,3 +17,14 @@ export async function getFundList(): Promise<FundDto[]> {
     throw error;
   }
 }
+
+// 获取基金详情
+export async function getFundDetail(code: string): Promise<FundDto> {
+  try {
+    const response = await api.get(`/fund/${code}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching fund detail:', error);
+    throw error;
+  }
+}
