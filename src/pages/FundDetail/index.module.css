@@ -1,0 +1,29 @@
+/* 样式文件 */
+.container {
+  max-width: 440px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.title {
+  margin-bottom: 28px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1677ff;
+  text-align: center;
+  letter-spacing: 1px;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 16px;
+  color: #222;
+}
+.label {
+  color: #888;
+  margin-right: 4px;
+}

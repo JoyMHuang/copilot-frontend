@@ -1,31 +1,71 @@
-import { useEffect } from 'react';
-import { ChartBarIcon } from '@heroicons/react/24/outline';
-import './FundList.css';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import FundApiService from '../../services/fundApi';
+import type { FundDto } from '../../types';
 
-export default function FundList() {
-  // 添加页面标识
+const FundList: React.FC = () => {
+  const [funds, setFunds] = useState<FundDto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currencyFilter, setCurrencyFilter] = useState('');
+
   useEffect(() => {
-    document.title = 'Fund List - Manulife Investment Management';
+    FundApiService.getFundList()
+      .then(setFunds)
+      .catch(() => setError('加载基金列表失败'))
+      .finally(() => setLoading(false));
   }, []);
 
+  const currencyOptions = Array.from(new Set(funds.map(f => f.currencyCode)));
+
+  const filteredFunds = funds.filter(fund =>
+    (currencyFilter === '' || fund.currencyCode === currencyFilter) &&
+    (fund.fundName.includes(searchTerm) || fund.code.includes(searchTerm))
+  );
+
+  if (loading) return <div>加载中...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
-    <div className="fundlist-container">
-      <div className="fundlist-content">
-        <div className="fundlist-header">
-          <ChartBarIcon className="fundlist-icon" />
-          <h1 className="fundlist-title">Fund List</h1>
-        </div>
-        
-        <div className="fundlist-card">
-          <div className="fundlist-placeholder">
-            <ChartBarIcon className="fundlist-placeholder-icon" />
-            <h3 className="fundlist-placeholder-title">Fund List</h3>
-            <p className="fundlist-placeholder-description">
-              基金列表页面内容将在这里显示。包括基金搜索、筛选和详细信息。
-            </p>
+    <div>
+      <div style={{ marginBottom: 20, display: 'flex', gap: 16 }}>
+        <input
+          type="text"
+          placeholder="搜索基金名称或代码"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          style={{ padding: 8, width: 260, borderRadius: 4, border: '1px solid #ccc' }}
+        />
+        <select
+          value={currencyFilter}
+          onChange={e => setCurrencyFilter(e.target.value)}
+          style={{ padding: 8, borderRadius: 4, border: '1px solid #ccc', width: 120 }}
+        >
+          <option value="">全部币种</option>
+          {currencyOptions.map(code => (
+            <option key={code} value={code}>{code}</option>
+          ))}
+        </select>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
+        {filteredFunds.map(fund => (
+          <div key={fund.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: 16, width: 260, boxShadow: '0 2px 8px #f0f1f2' }}>
+            <h3>
+              <Link to={`/fund/${fund.id}`} style={{ color: '#1677ff', textDecoration: 'underline' }}>
+                {fund.fundName}
+              </Link>
+              <span style={{ color: '#888', fontSize: 14 }}>({fund.code})</span>
+            </h3>
+            <div>单位净值：{fund.unitPrice}</div>
+            <div>净值日期：{fund.priceDate}</div>
+            <div>涨跌：<span style={{ color: fund.navChange >= 0 ? 'green' : 'red' }}>{fund.navChange} ({fund.navChangePercent}%)</span></div>
+            <div>币种：{fund.currencyCode}</div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-}
+};
+
+export default FundList;

@@ -49,3 +49,17 @@ export interface FundDto {
   navChange: number;
   navChangePercent: number;
 }
+
+export interface FundDetailDto {
+  id: string;
+  fundName: string;
+  code: string;
+  unitPrice: number;
+  currencyCode: string;
+  priceDate: string;
+  navChange: number;
+  navChangePercent: number;
+  productCode: string;
+  riskNature: string;
+  assestClass: string;
+}

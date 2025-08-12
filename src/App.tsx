@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Dashboard, FundList, TransactionHistory } from './pages';
+import FundDetail from './pages/FundDetail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/fund-list" element={<FundList />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
+              <Route path="/fund/:id" element={<FundDetail />} />
             </Routes>
           </div>
         </div>
