@@ -1,153 +1,126 @@
-# Manulife Investment Management Dashboard
+# Fund Display System
 
-A modern React TypeScript application inspired by the Manulife Investment Management dashboard design. This project provides a comprehensive fund display system with interactive portfolio visualization.
+## Overview
+This repository contains a React TypeScript frontend inspired by the Manulife Investment Management dashboard and a NestJS backend. The system displays fund portfolios, allocation charts, and related data with a modern, responsive UI.
 
-## Features
-
-- **Portfolio Dashboard**: Interactive dashboard showing portfolio allocation with pie charts
-- **Responsive Design**: Mobile-friendly interface that works across all devices
-- **Modern UI**: Clean, professional design with Manulife-inspired green theme
-- **Real-time Data**: Mock data structure ready for real API integration
-- **Navigation**: Sidebar navigation with multiple sections (Portfolio, Transactions, Profile, etc.)
-- **Wealth Specialist**: Contact information and quick actions for financial advisors
-
-## Tech Stack
-
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe development
-- **Vite** - Fast development and building
-- **Tailwind CSS** - Utility-first CSS framework
-- **Recharts** - Responsive chart library for data visualization
-- **Heroicons** - Beautiful hand-crafted SVG icons
+### Main Features (React App)
+- **Portfolio Dashboard:** Visualizes fund allocations and performance using interactive charts (Recharts).
+- **Sidebar Navigation:** Quick access to dashboard sections with a dark-themed sidebar.
+- **Responsive Design:** Optimized for desktop and mobile.
+- **Mock Data Support:** Easily switch between mock and live data for development.
+- **Type Safety:** All data structures use TypeScript interfaces.
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
+- Node.js (v16+ recommended)
 - npm or yarn
 
-### Installation
-
-1. Clone the repository
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/JoyMHuang/copilot-frontend.git
+git clone <repo-url>
 cd copilot-frontend
 ```
 
-2. Install dependencies
+### 2. Install Dependencies
+#### React Frontend
 ```bash
+cd copilot-frontend
+npm install
+```
+#### NestJS Backend
+```bash
+cd ../copilot-backend
 npm install
 ```
 
-3. Start the development server
+### 3. Run the Applications
+#### Start the Backend (NestJS)
 ```bash
+cd ../copilot-backend
+npm run start:dev
+```
+The backend will start on [http://localhost:3000](http://localhost:3000).
+
+#### Start the Frontend (React)
+```bash
+cd ../copilot-frontend
 npm run dev
 ```
-
-4. Open your browser and navigate to `http://localhost:5173`
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+The frontend will start on [http://localhost:5173](http://localhost:5173).
 
 ## Project Structure
-
 ```
-src/
-├── components/          # React components
-│   ├── Sidebar/        # Sidebar navigation components
-│   ├── Logo.tsx        # Manulife logo component
-│   ├── Router.tsx      # Route management
-│   └── PortfolioDashboard.tsx  # Main dashboard
-├── pages/              # Page components
-│   ├── Dashboard/      # Dashboard page
-│   ├── FundList/       # Fund list page
-│   └── TransactionHistory/  # Transaction history page
-├── routes/             # Route configuration
-├── data/               # Mock data and API utilities
-│   └── mockData.ts     # Sample portfolio data
-├── types/              # TypeScript type definitions
-│   └── index.ts        # Shared interfaces
-├── App.tsx             # Main application component
-└── main.tsx           # Application entry point
+copilot-frontend/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Sidebar.tsx
+│   │   ├── PortfolioDashboard.tsx
+│   │   └── ...
+│   ├── data/
+│   │   └── mockData.ts
+│   ├── types/
+│   │   └── index.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── router/
+│   │   └── index.tsx
+│   └── setupTests.ts
+├── tailwind.config.js
+├── vite.config.ts
+├── package.json
+└── ...
 ```
 
-## Design System
+### Main Files
+- **src/components/Sidebar.tsx:** Sidebar navigation with logo and menu.
+- **src/components/PortfolioDashboard.tsx:** Main dashboard with charts and portfolio data.
+- **src/data/mockData.ts:** Mock data for development/testing.
+- **src/types/index.ts:** TypeScript interfaces for all data structures.
+- **src/router/index.tsx:** React Router configuration.
+- **src/App.tsx:** Main app component, sets up layout and routing.
 
-### Colors
-- **Primary Green**: #22c55e (Manulife brand color)
-- **Dark Green**: #15803d
-- **Light Green**: #86efac
-- **Sidebar Background**: #1f2937
-- **Background**: #f8fafc
+## Router Configuration
+- Uses **React Router v6+** for client-side routing.
+- Main routes are defined in `src/router/index.tsx`:
+  - `/` → PortfolioDashboard
+  - Additional routes can be added for more features (e.g., fund details, settings).
+- Example:
+```tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PortfolioDashboard from '../components/PortfolioDashboard';
 
-### Typography
-- **Font Family**: Inter (Google Fonts)
-- **Weights**: 300, 400, 500, 600, 700
+export default function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PortfolioDashboard />} />
+        {/* Add more routes here */}
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
 
-## Features Overview
+## React Component Structure
+- **Sidebar:** Handles navigation, uses Heroicons for icons, styled with Tailwind.
+- **PortfolioDashboard:** Fetches and displays portfolio data, renders charts (Recharts), uses TypeScript interfaces for props/data.
+- **Other Components:** Can be added for fund details, user settings, etc.
+- **Styling:** Tailwind CSS with a green theme (`#22c55e`), dark sidebar, light content area.
 
-### Portfolio Dashboard
-- Total portfolio value display
-- Unrealized profit/loss tracking
-- Risk profile indicator
-- Interactive allocation pie chart
-- Detailed breakdown of investments
+## Tips for Developers
+- Use `import type` for all TypeScript type imports.
+- Follow the Manulife green theme and design guidelines (see `copilot-instructions.md`).
+- Use mock data for rapid development; switch to backend API for production.
+- Maintain consistent file naming (PascalCase for components).
+- Run tests with `npm test` (Jest configured for TypeScript).
+- Keep dependencies updated and review Tailwind config for customizations.
 
-### Investment Allocation
-- Equity (85.89%)
-- Bonds (6.13%)  
-- Multi-asset (7.08%)
-- Money market (0.90%)
+## Maintenance
+- Update TypeScript interfaces in `src/types/index.ts` when data structures change.
+- Add new routes/components as features expand.
+- Review and update mock data as needed for development.
 
-### Action Center
-- Subscribe to new funds
-- Switch between funds
-- Redeem investments
-- View pending transactions
-
-### Wealth Specialist
-- Contact information
-- Email and call actions
-- Advisor details
-
-## Development
-
-### Adding New Components
-1. Create component in `src/components/`
-2. Add proper TypeScript interfaces
-3. Use Tailwind classes for styling
-4. Follow existing naming conventions
-
-### Data Integration
-The app uses mock data in `src/data/mockData.ts`. To integrate with real APIs:
-1. Replace mock data with API calls
-2. Update interfaces in `src/types/index.ts` as needed
-3. Add error handling and loading states
-
-### Styling Guidelines
-- Use Tailwind utility classes
-- Follow mobile-first responsive design
-- Maintain consistent spacing (4px grid)
-- Use semantic color names from the theme
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Design inspired by Manulife Investment Management
-- Built with modern React best practices
-- Uses industry-standard financial UI patterns
+---
+For more details, see inline comments and the [copilot-instructions.md](./copilot-instructions.md) file.
