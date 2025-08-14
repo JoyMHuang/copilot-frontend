@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { PortfolioData, WealthSpecialist, Transaction } from '../types';
+import type { PortfolioData, WealthSpecialist, Transaction, Fund } from '../types';
 import { memoryCache } from '../utils/cache';
 
 // 创建axios实例
@@ -99,6 +99,17 @@ export class CustomerApiService {
       return response.data;
     } catch (error) {
       console.error('Error fetching transactions:', error);
+      throw error;
+    }
+  }
+
+  // 获取基金列表
+  static async getFunds(): Promise<Fund[]> {
+    try {
+      const response = await api.get('/fund');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching funds:', error);
       throw error;
     }
   }

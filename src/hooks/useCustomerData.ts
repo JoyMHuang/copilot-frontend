@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { CustomerApiService, type DashboardData } from '../services/customerApi';
-import type { PortfolioData, WealthSpecialist, Transaction } from '../types';
+import type { PortfolioData, WealthSpecialist, Transaction, Fund } from '../types';
 
 // Dashboard数据Hook
 export const useDashboard = (customerId: string) => {
@@ -209,4 +209,30 @@ export const useTransactions = (customerId: string) => {
   }, [customerId]);
 
   return { transactions, loading, error };
+};
+
+// 基金列表Hook
+export const useFunds = () => {
+  const [funds, setFunds] = useState<Fund[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchFunds = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await CustomerApiService.getFunds();
+        setFunds(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+        console.error('Error fetching funds:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFunds();
+  }, []);
+
+  return { funds, loading, error };
 };

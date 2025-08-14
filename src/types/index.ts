@@ -37,3 +37,14 @@ export interface NavigationItem {
   href: string;
   current: boolean;
 }
+
+export interface Fund {
+  id: number;
+  fundName: string;
+  code: string;
+  unitPrice: number;
+  currencyCode: string;
+  priceDate: Date;
+  navChange: number;
+  navChangePercent: number;
+}
