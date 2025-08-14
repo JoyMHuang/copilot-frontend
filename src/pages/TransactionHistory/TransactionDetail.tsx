@@ -7,6 +7,30 @@ export default function TransactionDetail() {
 	const navigate = useNavigate();
 	const transaction = mockTransactions.find(t => t.id === id);
 
+	// 假设每个交易都有关联的fundId，这里用id代替fundId（如有fundId请替换）
+	const fundId = id;
+
+	const handleDownloadReport = async () => {
+		try {
+			const response = await fetch(
+				`http://localhost:3000/fund/${fundId}/performance/pdf?latest=true`,
+				{ method: 'GET' }
+			);
+			if (!response.ok) throw new Error('Failed to download PDF');
+			const blob = await response.blob();
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `transaction-report-${id}.pdf`;
+			document.body.appendChild(a);
+			a.click();
+			window.URL.revokeObjectURL(url);
+			document.body.removeChild(a);
+		} catch (error) {
+			alert('下载报告失败');
+		}
+	};
+
 	if (!transaction) {
 		return (
 			<div className="transaction-container">
@@ -36,6 +60,12 @@ export default function TransactionDetail() {
 					<div className="mb-2"><strong>Amount:</strong> ${transaction.amount.toLocaleString()}</div>
 					<div className="mb-2"><strong>Date:</strong> {transaction.date}</div>
 					<div className="mb-2"><strong>Status:</strong> {transaction.status}</div>
+					<button
+						className="mt-4 px-4 py-2 bg-green-500 text-white rounded shadow-sm hover:bg-green-600"
+						onClick={handleDownloadReport}
+					>
+						下载交易报告 PDF
+					</button>
 				</div>
 			</div>
 		</div>
