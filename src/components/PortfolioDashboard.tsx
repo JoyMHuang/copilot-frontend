@@ -4,9 +4,10 @@ import type { PortfolioData, WealthSpecialist } from '../types';
 interface PortfolioDashboardProps {
   portfolioData: PortfolioData;
   wealthSpecialist: WealthSpecialist;
+  onPendingTransactionsClick?: () => void;
 }
 
-export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: PortfolioDashboardProps) {
+export default function PortfolioDashboard({ portfolioData, wealthSpecialist, onPendingTransactionsClick }: PortfolioDashboardProps) {
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-PH', {
       style: 'currency',
@@ -143,7 +144,10 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
                 <span className="text-sm font-medium text-gray-900">Redeem</span>
               </button>
 
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors">
+              <button
+                className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors"
+                onClick={onPendingTransactionsClick}
+              >
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
                   <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -167,12 +171,20 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
               <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>
               <h4 className="text-sm font-semibold text-gray-900 mb-4">{wealthSpecialist.name}</h4>
               <div className="space-y-2">
-                <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <a
+                  href={`mailto:${wealthSpecialist.email}`}
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors block text-center"
+                  title={`Email: ${wealthSpecialist.email}`}
+                >
                   Email
-                </button>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                </a>
+                <a
+                  href={`tel:${wealthSpecialist.phone}`}
+                  className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors block text-center"
+                  title={`Call: ${wealthSpecialist.phone}`}
+                >
                   Call
-                </button>
+                </a>
               </div>
             </div>
           </div>

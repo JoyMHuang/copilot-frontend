@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { ChartPieIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 import PortfolioDashboard from '../../components/PortfolioDashboard';
 import { usePortfolio, useWealthSpecialist } from '../../hooks/useCustomerData';
 import { mockPortfolioData, mockWealthSpecialist } from '../../data/mockData';
@@ -10,6 +11,11 @@ export default function Dashboard() {
   const customerId = 'C000027106';
   const { portfolioData, loading: portfolioLoading, error: portfolioError } = usePortfolio(customerId);
   const { wealthSpecialist, loading: specialistLoading, error: specialistError } = useWealthSpecialist(customerId);
+
+  const navigate = useNavigate();
+  const handlePendingTransactionsClick = () => {
+    navigate('/transaction-history?status=pending');
+  };
 
   // 合并加载状态
   const loading = portfolioLoading || specialistLoading;
@@ -83,6 +89,7 @@ export default function Dashboard() {
           <PortfolioDashboard 
             portfolioData={portfolioData || mockPortfolioData}
             wealthSpecialist={wealthSpecialist || mockWealthSpecialist}
+            onPendingTransactionsClick={handlePendingTransactionsClick}
           />
         </div>
       </div>
