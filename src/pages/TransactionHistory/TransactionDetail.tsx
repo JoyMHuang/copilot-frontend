@@ -13,9 +13,11 @@ export default function TransactionDetail() {
 	const handleDownloadReport = async () => {
 		try {
 			const response = await fetch(
-				`http://localhost:3000/fund/${fundId}/performance/pdf?latest=true`,
+				`http://localhost:8000/api/fund/${fundId}/performance/pdf?latest=true`,
 				{ method: 'GET' }
 			);
+			console.log('response-----------------',response);
+			
 			if (!response.ok) throw new Error('Failed to download PDF');
 			const blob = await response.blob();
 			const url = window.URL.createObjectURL(blob);
@@ -27,6 +29,8 @@ export default function TransactionDetail() {
 			window.URL.revokeObjectURL(url);
 			document.body.removeChild(a);
 		} catch (error) {
+			console.log('error-------------------',error);
+
 			alert('下载报告失败');
 		}
 	};
