@@ -1,0 +1,86 @@
+import type { Fund } from '../types/fund';
+
+export const mockFundList: Fund[] = [
+  {
+    id: '1',
+    code: 'MFC001',
+    fundName: 'Manulife Growth Fund',
+    name: 'Manulife Growth Fund',
+    unitPrice: 15.2468,
+    currencyCode: 'USD',
+    navChange: 0.1256,
+    navChangePercent: 0.83,
+    priceDate: '2024-01-15',
+  },
+  {
+    id: '2',
+    code: 'MFC002',
+    fundName: 'Manulife Income Fund',
+    name: 'Manulife Income Fund',
+    unitPrice: 12.5678,
+    currencyCode: 'CAD',
+    navChange: -0.0234,
+    navChangePercent: -0.19,
+    priceDate: '2024-01-15',
+  },
+  {
+    id: '3',
+    code: 'MFC003',
+    fundName: 'Manulife Global Equity Fund',
+    name: 'Manulife Global Equity Fund',
+    unitPrice: 23.4567,
+    currencyCode: 'EUR',
+    navChange: 0.3456,
+    navChangePercent: 1.49,
+    priceDate: '2024-01-15',
+  },
+  {
+    id: '4',
+    code: 'MFC004',
+    fundName: 'Manulife Bond Fund',
+    name: 'Manulife Bond Fund',
+    unitPrice: 10.1234,
+    currencyCode: 'USD',
+    navChange: 0.0123,
+    navChangePercent: 0.12,
+    priceDate: '2024-01-15',
+  },
+  {
+    id: '5',
+    code: 'MFC005',
+    fundName: 'Manulife Asian Growth Fund',
+    name: 'Manulife Asian Growth Fund',
+    unitPrice: 18.9876,
+    currencyCode: 'HKD',
+    navChange: -0.2345,
+    navChangePercent: -1.22,
+    priceDate: '2024-01-15',
+  },
+];
+
+export const mockFundListEmpty: Fund[] = [];
+
+export const mockFundListSingleCurrency: Fund[] = [
+  {
+    id: '1',
+    code: 'MFC001',
+    fundName: 'USD Fund 1',
+    name: 'USD Fund 1',
+    unitPrice: 15.2468,
+    currencyCode: 'USD',
+    navChange: 0.1256,
+    navChangePercent: 0.83,
+    priceDate: '2024-01-15',
+  },
+  {
+    id: '2',
+    code: 'MFC002',
+    fundName: 'USD Fund 2',
+    name: 'USD Fund 2',
+    unitPrice: 12.5678,
+    currencyCode: 'USD',
+    navChange: -0.0234,
+    navChangePercent: -0.19,
+    priceDate: '2024-01-15',
+  },
+];
