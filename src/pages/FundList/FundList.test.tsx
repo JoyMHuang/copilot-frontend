@@ -4,6 +4,10 @@ import FundApiService from '../../services/fundApi';
 import { BrowserRouter } from 'react-router-dom';
 
 jest.mock('../../services/fundApi');
+jest.mock('../../utils/env', () => ({
+  getApiBaseUrl: () => 'http://localhost:8000/api',
+  getApiTimeout: () => 10000,
+}));
 
 const mockFunds = [
   {

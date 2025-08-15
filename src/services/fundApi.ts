@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getApiBaseUrl, getApiTimeout } from '../utils/env';
 
 export interface FundDto {
   id: string;
@@ -12,8 +13,8 @@ export interface FundDto {
 }
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api',
-  timeout: parseInt(import.meta.env.VITE_API_TIMEOUT) || 10000,
+  baseURL: getApiBaseUrl(),
+  timeout: getApiTimeout(),
 });
 
 export class FundApiService {
@@ -28,5 +29,4 @@ export class FundApiService {
   }
 }
 
-export type { FundDto };
 export default FundApiService;
