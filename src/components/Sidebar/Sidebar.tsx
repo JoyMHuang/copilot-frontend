@@ -10,6 +10,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from '../../routes';
 import Logo from '../Logo';
+import type { NavigationItem } from '../../types';
 
 const iconMap = {
   'chart-pie': ChartPieIcon,
@@ -21,8 +22,22 @@ const iconMap = {
   'trending-up': ChartBarIcon,
 };
 
-export default function Sidebar() {
+interface SidebarProps {
+  navigation?: NavigationItem[];
+  onNavigationChange?: (item: NavigationItem) => void;
+}
+
+export default function Sidebar({ navigation, onNavigationChange }: SidebarProps) {
   const location = useLocation();
+
+  // If navigation prop is provided, use it; otherwise fall back to routes
+  const navigationItems = navigation || routes.map(route => ({
+    id: route.id,
+    name: route.name,
+    icon: route.icon,
+    href: route.path,
+    current: location.pathname === route.path
+  }));
 
   return (
     <div className="flex h-screen flex-col bg-sidebar-bg text-white w-64">
@@ -41,14 +56,21 @@ export default function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
-        {routes.map((route) => {
-          const Icon = iconMap[route.icon as keyof typeof iconMap];
-          const isActive = location.pathname === route.path;
+        {navigationItems.map((item) => {
+          const Icon = iconMap[item.icon as keyof typeof iconMap];
+          const isActive = navigation ? item.current : location.pathname === item.href;
+          
+          const handleClick = () => {
+            if (onNavigationChange) {
+              onNavigationChange(item);
+            }
+          };
           
           return (
             <Link
-              key={route.id}
-              to={route.path}
+              key={item.id}
+              to={item.href}
+              onClick={handleClick}
               className={`w-full flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                 isActive
                   ? 'bg-manulife-green text-white'
@@ -56,7 +78,7 @@ export default function Sidebar() {
               }`}
             >
               <Icon className="w-5 h-5 mr-3" />
-              {route.name}
+              {item.name}
             </Link>
           );
         })}

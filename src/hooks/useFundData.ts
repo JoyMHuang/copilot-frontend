@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import type { Fund } from '../types/fund';
+import { useState, useEffect, useCallback } from 'react';
+import type { Fund, FundListResponse } from '../types/fund';
 import type { FundDetail } from '../types/fundDetail.dto';
-import { FundApiService } from '../services/fundApi';
+import { FundApiService, type FundListParams } from '../services/fundApi';
 import { mockFundDetails } from '../data/mockFundDetails';
 
-export function useFundList() {
+export function useFundList(params?: FundListParams) {
   const [fundList, setFundList] = useState<Fund[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +14,7 @@ export function useFundList() {
       try {
         setLoading(true);
         setError(null);
-        const data = await FundApiService.getFundList();
+        const data = await FundApiService.getFundList(params);
         setFundList(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch fund list');
@@ -25,9 +25,102 @@ export function useFundList() {
     };
 
     fetchFundList();
-  }, []);
+  }, [JSON.stringify(params)]);
 
   return { fundList, loading, error };
+}
+
+export function useFundListWithPagination(params?: FundListParams) {
+  const [fundListResponse, setFundListResponse] = useState<FundListResponse>({ data: [], total: 0 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchFundList = useCallback(async (newParams?: FundListParams) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await FundApiService.getFundListWithPagination(newParams || params);
+      setFundListResponse(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to fetch fund list');
+      console.error('Error fetching fund list:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [params]);
+
+  useEffect(() => {
+    fetchFundList();
+  }, [fetchFundList]);
+
+  return { 
+    fundList: fundListResponse.data, 
+    total: fundListResponse.total,
+    page: fundListResponse.page,
+    pageSize: fundListResponse.pageSize,
+    loading, 
+    error,
+    refetch: fetchFundList
+  };
+}
+
+export function useFundSearch() {
+  const [searchResults, setSearchResults] = useState<Fund[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const search = useCallback(async (query: string) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await FundApiService.searchFunds(query);
+      setSearchResults(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to search funds');
+      console.error('Error searching funds:', err);
+      setSearchResults([]);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const clearResults = useCallback(() => {
+    setSearchResults([]);
+    setError(null);
+  }, []);
+
+  return { searchResults, loading, error, search, clearResults };
+}
+
+export function useAvailableCurrencies() {
+  const [currencies, setCurrencies] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCurrencies = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await FundApiService.getAvailableCurrencies();
+        setCurrencies(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch currencies');
+        console.error('Error fetching currencies:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCurrencies();
+  }, []);
+
+  return { currencies, loading, error };
 }
 
 export function useFundDetail(fundId: string | undefined) {

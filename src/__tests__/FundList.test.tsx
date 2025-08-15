@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import FundList from '../pages/FundList';
 import { useFundList } from '../hooks/useFundData';
 import { mockFundList, mockFundListEmpty, mockFundListSingleCurrency } from './mockData';
-import type { Fund } from '../types/fund';
 
 // Mock the hook
 jest.mock('../../hooks/useFundData');
