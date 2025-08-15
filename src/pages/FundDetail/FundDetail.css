@@ -1,0 +1,37 @@
+.fund-detail-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+.fund-detail-row {
+  display: flex;
+  gap: 48px;
+}
+.fund-detail-col {
+  flex: 1;
+}
+.fund-detail-item {
+  display: flex;
+  margin-bottom: 32px;
+  align-items: center;
+}
+.fund-detail-label {
+  font-size: 22px;
+  font-weight: 600;
+  width: 180px;
+  color: #1976d2;
+}
+.fund-detail-value {
+  font-size: 22px;
+  font-weight: 400;
+  margin-left: 20px;
+}
+.fund-detail-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
