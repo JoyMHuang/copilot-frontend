@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { useNavigate } from 'react-router-dom';
 import type { PortfolioData, WealthSpecialist } from '../types';
 
 interface PortfolioDashboardProps {
@@ -7,6 +8,8 @@ interface PortfolioDashboardProps {
 }
 
 export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: PortfolioDashboardProps) {
+  const navigate = useNavigate();
+  
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-PH', {
       style: 'currency',
@@ -17,6 +20,21 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
 
   const formatPercentage = (percentage: number) => {
     return `${percentage.toFixed(2)}%`;
+  };
+
+  const handleEmailClick = (email: string) => {
+    if (email) {
+      window.location.href = `mailto:${email}`;
+    }
+  };
+  const handleCallClick = (phone: string) => {
+    if (phone) {
+      window.location.href = `tel:${phone}`;
+    }
+  };
+
+  const handleViewPendingTransactions = () => {
+    navigate('/transaction-history?status=pending');
   };
 
   return (
@@ -141,9 +159,10 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
                   </svg>
                 </div>
                 <span className="text-sm font-medium text-gray-900">Redeem</span>
-              </button>
-
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors">
+              </button>              <button 
+                onClick={handleViewPendingTransactions}
+                className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors"
+              >
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
                   <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -167,10 +186,16 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
               <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>
               <h4 className="text-sm font-semibold text-gray-900 mb-4">{wealthSpecialist.name}</h4>
               <div className="space-y-2">
-                <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <button 
+                  onClick={() => handleEmailClick(wealthSpecialist.email)}
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
                   Email
                 </button>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <button 
+                  onClick={() => handleCallClick(wealthSpecialist.phone)}
+                  className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                >
                   Call
                 </button>
               </div>

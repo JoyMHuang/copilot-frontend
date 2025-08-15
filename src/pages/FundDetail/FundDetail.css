@@ -1,0 +1,40 @@
+/* Fund Detail Page Styles */
+.funddetail-container {
+  flex: 1;
+  background-color: #f3f4f6;
+  padding: 1.5rem;
+}
+
+.funddetail-content {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.funddetail-header {
+  margin-bottom: 2rem;
+}
+
+.funddetail-icon {
+  height: 2rem;
+  width: 2rem;
+  color: #22c55e;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.funddetail-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .funddetail-container {
+    padding: 1rem;
+  }
+  
+  .funddetail-title {
+    font-size: 1.5rem;
+  }
+}

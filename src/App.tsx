@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
-import { Dashboard, FundList, TransactionHistory } from './pages';
+import { Dashboard, FundList, FundDetail, TransactionHistory } from './pages';
 
 function App() {
   return (
@@ -11,11 +11,11 @@ function App() {
         
         {/* 主内容区域 */}
         <div className="flex-1 flex flex-col">
-          <div className="flex-1 overflow-auto">
-            <Routes>
+          <div className="flex-1 overflow-auto">            <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/fund-list" element={<FundList />} />
+              <Route path="/fund-detail/:fundId" element={<FundDetail />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
             </Routes>
           </div>
