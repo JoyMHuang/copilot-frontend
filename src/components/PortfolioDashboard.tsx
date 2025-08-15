@@ -1,4 +1,5 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { Link } from 'react-router-dom';
 import type { PortfolioData, WealthSpecialist } from '../types';
 
 interface PortfolioDashboardProps {
@@ -143,7 +144,10 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
                 <span className="text-sm font-medium text-gray-900">Redeem</span>
               </button>
 
-              <button className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors">
+              <Link
+                to="/transaction-history?status=pending"
+                className="flex flex-col items-center p-4 border border-gray-200 rounded-lg hover:border-manulife-green transition-colors"
+              >
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-2">
                   <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -154,7 +158,7 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
                   <br />
                   <span className="text-sm font-medium text-gray-900">transactions</span>
                 </div>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
