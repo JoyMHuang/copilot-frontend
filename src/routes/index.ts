@@ -1,5 +1,5 @@
 import type { NavigationItem } from '../types';
-import { Dashboard, FundList, TransactionHistory } from '../pages';
+import { Dashboard, FundList, TransactionHistory, FundDetail } from '../pages'; 
 
 export interface Route {
   id: string;
@@ -31,6 +31,13 @@ export const routes: Route[] = [
     name: 'Transaction History',
     icon: 'clock',
   },
+  {
+    id: 'fund-detail',
+    path: '/fund-detail',
+    component: FundDetail,
+    name: 'Fund Detail',
+    icon: 'document-text', // 由 'user' 改为 'document-text'，更适合资料/详情页面
+  }
 ];
 
 // 从路由生成导航项

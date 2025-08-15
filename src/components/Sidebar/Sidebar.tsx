@@ -5,7 +5,8 @@ import {
   UserIcon,
   WrenchScrewdriverIcon,
   TrophyIcon,
-  ChartBarIcon
+  ChartBarIcon,
+  DocumentTextIcon // 新增用于详情页的资料/文档icon
 } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
 import { routes } from '../../routes';
@@ -19,6 +20,8 @@ const iconMap = {
   'tool': WrenchScrewdriverIcon,
   'target': TrophyIcon,
   'trending-up': ChartBarIcon,
+  'document-text': DocumentTextIcon, // 新增映射
+  'createFiberFromTypeAndProps': ChartBarIcon, // Fallback icon
 };
 
 export default function Sidebar() {
@@ -42,6 +45,7 @@ export default function Sidebar() {
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6 space-y-2">
         {routes.map((route) => {
+          try {
           const Icon = iconMap[route.icon as keyof typeof iconMap];
           const isActive = location.pathname === route.path;
           
@@ -59,6 +63,10 @@ export default function Sidebar() {
               {route.name}
             </Link>
           );
+        }
+        catch(e) {
+          return <></>
+        }
         })}
       </nav>
 
