@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { Fund } from '../types/fund';
 import { memoryCache } from '../utils/cache';
+import { mockFundList } from '../data/mockFundList';
 
 // 创建axios实例
 const api = axios.create({
@@ -30,8 +31,10 @@ export class FundApiService {
       
       return data;
     } catch (error) {
-      console.error('Error fetching fund list:', error);
-      throw error;
+      console.warn('API request failed, using mock data:', error);
+      // API调用失败时使用模拟数据
+      memoryCache.set(cacheKey, mockFundList, 5 * 60 * 1000);
+      return mockFundList;
     }
   }
 
@@ -55,7 +58,13 @@ export class FundApiService {
       
       return data;
     } catch (error) {
-      console.error('Error fetching fund data:', error);
+      console.warn(`API request failed for fund ${code}, checking mock data:`, error);
+      // API调用失败时从模拟数据中查找
+      const mockFund = mockFundList.find(f => f.code === code);
+      if (mockFund) {
+        memoryCache.set(cacheKey, mockFund, 5 * 60 * 1000);
+        return mockFund;
+      }
       throw error;
     }
   }
