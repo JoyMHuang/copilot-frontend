@@ -20,6 +20,9 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
     return `${percentage.toFixed(2)}%`;
   };
 
+  // 规范化电话用于 tel: 链接
+  const normalizedPhone = wealthSpecialist.phone.replace(/[^+\d]/g, '');
+
   return (
     <div className="flex-1 bg-gray-50 p-6">
       {/* Header */}
@@ -171,12 +174,20 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
               <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>
               <h4 className="text-sm font-semibold text-gray-900 mb-4">{wealthSpecialist.name}</h4>
               <div className="space-y-2">
-                <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <a
+                  href={`mailto:${wealthSpecialist.email}`}
+                  className="w-full inline-block text-center bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                  aria-label={`Email ${wealthSpecialist.name}`}
+                >
                   Email
-                </button>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                </a>
+                <a
+                  href={`tel:${normalizedPhone}`}
+                  className="w-full inline-block text-center bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                  aria-label={`Call ${wealthSpecialist.name}`}
+                >
                   Call
-                </button>
+                </a>
               </div>
             </div>
           </div>
