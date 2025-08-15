@@ -149,7 +149,10 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
                 </div>
-                <div className="text-center">
+                <div
+                  className="text-center cursor-pointer"
+                  onClick={() => window.location.href = '/transaction-history?status=pending'}
+                >
                   <span className="text-sm font-medium text-gray-900">View pending</span>
                   <br />
                   <span className="text-sm font-medium text-gray-900">transactions</span>
@@ -166,14 +169,20 @@ export default function PortfolioDashboard({ portfolioData, wealthSpecialist }: 
             <div className="text-center">
               <div className="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>
               <h4 className="text-sm font-semibold text-gray-900 mb-4">{wealthSpecialist.name}</h4>
-              <div className="space-y-2">
-                <button className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <div className="space-y-2">
+                <button
+                  className="w-full bg-gray-100 hover:bg-gray-200 text-gray-900 py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                  onClick={() => window.location.href = `mailto:${wealthSpecialist.email}`}
+                >
                   Email
                 </button>
-                <button className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors">
+                <button
+                  className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors"
+                  onClick={() => window.location.href = `tel:${wealthSpecialist.phone}`}
+                >
                   Call
                 </button>
-              </div>
+                </div>
             </div>
           </div>
         </div>
