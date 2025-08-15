@@ -2,152 +2,203 @@
 
 A modern React TypeScript application inspired by the Manulife Investment Management dashboard design. This project provides a comprehensive fund display system with interactive portfolio visualization.
 
-## Features
+---
 
-- **Portfolio Dashboard**: Interactive dashboard showing portfolio allocation with pie charts
-- **Responsive Design**: Mobile-friendly interface that works across all devices
-- **Modern UI**: Clean, professional design with Manulife-inspired green theme
-- **Real-time Data**: Mock data structure ready for real API integration
-- **Navigation**: Sidebar navigation with multiple sections (Portfolio, Transactions, Profile, etc.)
-- **Wealth Specialist**: Contact information and quick actions for financial advisors
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Main Features](#main-features)
+- [Tech Stack](#tech-stack)
+- [File Structure](#file-structure)
+- [Router Configuration](#router-configuration)
+- [Component Structure](#component-structure)
+- [Getting Started](#getting-started)
+- [Development Tips](#development-tips)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+---
+
+## Project Overview
+This repository contains a full-stack investment dashboard, featuring a modern React frontend and a NestJS backend. The frontend provides interactive portfolio management, while the backend is designed for scalable API integration and data management.
+
+---
+
+## Main Features
+### React Frontend
+- **Portfolio Dashboard**: Visualizes portfolio allocation, total value, and performance with interactive charts.
+- **Responsive Design**: Mobile-friendly, adapts to all screen sizes.
+- **Modern UI**: Manulife-inspired green theme, clean layouts, and intuitive navigation.
+- **Real-time Data**: Mock data structure, ready for API integration.
+- **Sidebar Navigation**: Quick access to Portfolio, Transactions, Profile, and more.
+- **Wealth Specialist**: Advisor contact info and quick actions.
+- **Action Center**: Subscribe, switch, redeem funds, and view pending transactions.
+
+### NestJS Backend
+- **RESTful API**: Provides endpoints for portfolio, transactions, and user data.
+- **Mock Data**: Easily replaceable with real database integration.
+- **Scalable Structure**: Modular controllers, services, and DTOs for maintainability.
+
+---
 
 ## Tech Stack
+- **React 18** (TypeScript, Vite)
+- **NestJS** (TypeScript, Express)
+- **Tailwind CSS**
+- **Recharts**
+- **Heroicons**
 
-- **React 18** - Modern React with hooks
-- **TypeScript** - Type-safe development
-- **Vite** - Fast development and building
-- **Tailwind CSS** - Utility-first CSS framework
-- **Recharts** - Responsive chart library for data visualization
-- **Heroicons** - Beautiful hand-crafted SVG icons
+---
+
+## File Structure
+```
+copilot-frontend/
+├── src/
+│   ├── components/          # Reusable React components
+│   │   ├── Sidebar/        # Sidebar navigation and items
+│   │   ├── Logo.tsx        # Manulife logo
+│   │   ├── Router.tsx      # App router configuration
+│   │   └── PortfolioDashboard.tsx  # Main dashboard UI
+│   ├── pages/              # Page-level components
+│   │   ├── Dashboard/      # Portfolio dashboard page
+│   │   ├── FundList/       # Fund list page
+│   │   └── TransactionHistory/  # Transaction history page
+│   ├── routes/             # Route definitions
+│   ├── data/               # Mock data and API utilities
+│   │   └── mockData.ts     # Sample portfolio data
+│   ├── types/              # TypeScript interfaces
+│   │   └── index.ts        # Shared types
+│   ├── App.tsx             # Main app component
+│   └── main.tsx            # App entry point
+├── public/                 # Static assets
+├── package.json            # Project metadata
+└── README.md               # Documentation
+
+copilot-backend/
+├── src/
+│   ├── app.controller.ts   # Main controller
+│   ├── app.service.ts      # Main service
+│   ├── main.ts             # Entry point
+│   ├── modules/            # Feature modules (portfolio, transactions, user)
+│   └── dto/                # Data transfer objects
+├── test/                   # Test files
+├── package.json            # Backend metadata
+└── README.md               # Backend documentation
+```
+
+### Key Files Explained
+- **App.tsx**: Root React component, sets up layout and router.
+- **main.tsx**: Entry point, renders App to DOM.
+- **Router.tsx**: Defines routes and navigation logic.
+- **mockData.ts**: Contains sample data for development.
+- **Sidebar/**: Navigation UI, links to main sections.
+- **PortfolioDashboard.tsx**: Displays portfolio summary and charts.
+- **NestJS main.ts**: Bootstraps backend server.
+- **app.controller.ts**: Handles API requests.
+
+---
+
+## Router Configuration
+Routing is managed in `src/components/Router.tsx` using React Router (or similar). Example structure:
+```tsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from '../pages/Dashboard';
+import FundList from '../pages/FundList';
+import TransactionHistory from '../pages/TransactionHistory';
+
+<BrowserRouter>
+  <Routes>
+    <Route path="/" element={<Dashboard />} />
+    <Route path="/funds" element={<FundList />} />
+    <Route path="/transactions" element={<TransactionHistory />} />
+    {/* Add more routes as needed */}
+  </Routes>
+</BrowserRouter>
+```
+- **Sidebar** links correspond to these routes for seamless navigation.
+- **Route components** are organized in `src/pages/` for clarity.
+
+---
+
+## Component Structure
+- **Sidebar/**: Contains navigation, logo, and quick links.
+- **PortfolioDashboard.tsx**: Main dashboard, pie chart, value display, risk profile.
+- **FundList/**: Lists available funds, details, and actions.
+- **TransactionHistory/**: Shows transaction records and statuses.
+- **WealthSpecialist/**: Advisor contact and info.
+- **ActionCenter/**: Fund actions (subscribe, switch, redeem).
+- **Shared Components**: Buttons, cards, modals, etc. for UI consistency.
+
+Each component uses TypeScript interfaces from `src/types/` and Tailwind CSS for styling. Data flows via props and context for maintainability.
+
+---
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
+- Node.js 16+
 - npm or yarn
 
-### Installation
-
-1. Clone the repository
+### 1. Clone the repository
 ```bash
 git clone https://github.com/JoyMHuang/copilot-frontend.git
 cd copilot-frontend
 ```
 
-2. Install dependencies
+### 2. Install dependencies (Frontend)
 ```bash
 npm install
 ```
 
-3. Start the development server
+### 3. Start the React development server
 ```bash
 npm run dev
 ```
+Open your browser at `http://localhost:5173`
 
-4. Open your browser and navigate to `http://localhost:5173`
-
-## Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-## Project Structure
-
+### 4. Start the NestJS backend
+```bash
+cd ../copilot-backend
+npm install
+npm run start:dev
 ```
-src/
-├── components/          # React components
-│   ├── Sidebar/        # Sidebar navigation components
-│   ├── Logo.tsx        # Manulife logo component
-│   ├── Router.tsx      # Route management
-│   └── PortfolioDashboard.tsx  # Main dashboard
-├── pages/              # Page components
-│   ├── Dashboard/      # Dashboard page
-│   ├── FundList/       # Fund list page
-│   └── TransactionHistory/  # Transaction history page
-├── routes/             # Route configuration
-├── data/               # Mock data and API utilities
-│   └── mockData.ts     # Sample portfolio data
-├── types/              # TypeScript type definitions
-│   └── index.ts        # Shared interfaces
-├── App.tsx             # Main application component
-└── main.tsx           # Application entry point
-```
+Backend runs at `http://localhost:3000` (default).
 
-## Design System
+### 5. Connect Frontend to Backend
+- Update API endpoints in frontend data utilities (e.g., `src/data/`)
+- Replace mock data with real API calls as needed
 
-### Colors
-- **Primary Green**: #22c55e (Manulife brand color)
-- **Dark Green**: #15803d
-- **Light Green**: #86efac
-- **Sidebar Background**: #1f2937
-- **Background**: #f8fafc
+---
 
-### Typography
-- **Font Family**: Inter (Google Fonts)
-- **Weights**: 300, 400, 500, 600, 700
+## Development Tips
+- **Component Reuse**: Build UI as small, reusable components.
+- **Type Safety**: Use TypeScript interfaces for all props and data.
+- **Styling**: Use Tailwind classes, keep styles consistent.
+- **Routing**: Organize routes in `Router.tsx` and keep pages in `src/pages/`.
+- **API Integration**: Start with mock data, then connect to backend endpoints.
+- **Error Handling**: Add loading and error states for all API calls.
+- **Testing**: Add unit tests for key logic and components.
+- **Documentation**: Update README and code comments for maintainability.
 
-## Features Overview
-
-### Portfolio Dashboard
-- Total portfolio value display
-- Unrealized profit/loss tracking
-- Risk profile indicator
-- Interactive allocation pie chart
-- Detailed breakdown of investments
-
-### Investment Allocation
-- Equity (85.89%)
-- Bonds (6.13%)  
-- Multi-asset (7.08%)
-- Money market (0.90%)
-
-### Action Center
-- Subscribe to new funds
-- Switch between funds
-- Redeem investments
-- View pending transactions
-
-### Wealth Specialist
-- Contact information
-- Email and call actions
-- Advisor details
-
-## Development
-
-### Adding New Components
-1. Create component in `src/components/`
-2. Add proper TypeScript interfaces
-3. Use Tailwind classes for styling
-4. Follow existing naming conventions
-
-### Data Integration
-The app uses mock data in `src/data/mockData.ts`. To integrate with real APIs:
-1. Replace mock data with API calls
-2. Update interfaces in `src/types/index.ts` as needed
-3. Add error handling and loading states
-
-### Styling Guidelines
-- Use Tailwind utility classes
-- Follow mobile-first responsive design
-- Maintain consistent spacing (4px grid)
-- Use semantic color names from the theme
+---
 
 ## Contributing
-
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
+---
 
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+---
 
+## Acknowledgments
 - Design inspired by Manulife Investment Management
-- Built with modern React best practices
+- Built with modern React and NestJS best practices
 - Uses industry-standard financial UI patterns
+
+---
