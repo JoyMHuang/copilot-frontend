@@ -44,14 +44,14 @@ export const mockWealthSpecialist: WealthSpecialist = {
 
 export const mockTransactions: Transaction[] = [
   {
-    id: '1',
+    id: 'FUND001',
     type: 'Subscribe',
     amount: 50000,
     date: '2025-07-15',
     status: 'Completed'
   },
   {
-    id: '2',
+    id: 'FUND002',
     type: 'Switch',
     amount: 25000,
     date: '2025-07-10',

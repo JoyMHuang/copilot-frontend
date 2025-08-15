@@ -1,6 +1,8 @@
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar';
 import { Dashboard, FundList, TransactionHistory } from './pages';
+import TransactionDetail from './pages/TransactionHistory/TransactionDetail';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/fund-list" element={<FundList />} />
               <Route path="/transaction-history" element={<TransactionHistory />} />
+              <Route path="/transaction-history/:id" element={<TransactionDetail />} />
             </Routes>
           </div>
         </div>
